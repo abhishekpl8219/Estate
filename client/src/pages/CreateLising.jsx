@@ -137,7 +137,7 @@ const CreateLising = () => {
       if (data.success === false) {
         setError(data.message);
       }
-      navigate(`/listing/${data._id}`)
+      navigate(`/listing/${data._id}`);
     } catch (error) {
       setError(error.message);
       setLoading(false);
@@ -271,7 +271,11 @@ const CreateLising = () => {
               />
               <div className="flex flex-col items-center">
                 <p>Regular price</p>
-                <span className="text-xs">($/month)</span>
+                {
+                  (formData.type = "rent" && (
+                    <span className="text-xs">($/month)</span>
+                  ))
+                }
               </div>
             </div>
             {formData.offer && (
@@ -288,7 +292,11 @@ const CreateLising = () => {
                 />
                 <div className="flex flex-col items-center">
                   <p>Discount price</p>
-                  <span className="text-xs">($/month)</span>
+                  {
+                    (formData.type = "rent" && (
+                      <span className="text-xs">($/month)</span>
+                    ))
+                  }
                 </div>
               </div>
             )}
