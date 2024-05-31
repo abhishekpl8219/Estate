@@ -56,7 +56,7 @@ const CreateLising = () => {
       setUploading(false);
     }
   };
-  console.log("formadata", formData);
+
   const storeImage = async (file) => {
     return new Promise((resolve, reject) => {
       const storage = getStorage(app);
