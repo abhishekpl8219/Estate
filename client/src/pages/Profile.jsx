@@ -45,7 +45,7 @@ const Profile = () => {
       (snapshot) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("upload is", +progress + "%done");
+
         setFilePerc(Math.round(progress));
       },
       (error) => {
@@ -138,11 +138,10 @@ const Profile = () => {
       });
       const data = await res.json();
       if (data.success === false) {
-        console.log(data.message);
         return;
       }
       setUserListings((prev) =>
-        prev.filter((listing) => listing.id !== listingId)
+        prev.filter((listing) => listing._id !== listingId)
       );
     } catch (error) {
       console.log(error.message);
@@ -211,7 +210,7 @@ const Profile = () => {
         </button>
         <Link
           className="bg-green-700 text-white p-3 rounded-lg hover:opacity-40 text-center uppercase"
-          to="/create-listing"
+          to={"/create-listing"}
         >
           Create Listing
         </Link>

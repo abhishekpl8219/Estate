@@ -7,7 +7,8 @@ import {
 } from "firebase/storage";
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
+
 const CreateLising = () => {
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
@@ -68,7 +69,6 @@ const CreateLising = () => {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(`Upload is ${progress}% done`);
         },
         (error) => {
           reject(error);
@@ -120,9 +120,10 @@ const CreateLising = () => {
         return setError("you must upload at least one image");
       if (+formData.regularPrice < +formData.discountPrice)
         return setError("Discount price must be lower than regular price");
+
       setLoading(true);
       setError(false);
-      const res = await fetch("/api/listing/create", {
+      const res = await fetch(`/api/listing/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -143,6 +144,7 @@ const CreateLising = () => {
       setLoading(false);
     }
   };
+
   return (
     <main className="p-3 max-w-7xl mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">
@@ -292,11 +294,9 @@ const CreateLising = () => {
                 />
                 <div className="flex flex-col items-center">
                   <p>Discount price</p>
-                  {
-                    (formData.type = "rent" && (
-                      <span className="text-xs">($/month)</span>
-                    ))
-                  }
+                  {formData.type === "rent" && (
+                    <span className="text-xs">($/month)</span>
+                  )}
                 </div>
               </div>
             )}
