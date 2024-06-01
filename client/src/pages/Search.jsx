@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListingItem from "../Components/ListingItem";
 
@@ -238,7 +238,7 @@ const Search = () => {
             ))}
           {showMore && (
             <button
-              onClick={onShowMoreClick()}
+              onClick={() => onShowMoreClick()}
               className="text-green-700 hover:underline p-7 w-full text-center"
             >
               Show More

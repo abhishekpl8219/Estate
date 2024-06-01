@@ -46,9 +46,9 @@ export default function UpdateListing() {
     };
 
     fetchListing();
-  }, []);
+  });
 
-  const handleImageSubmit = (e) => {
+  const handleImageSubmit = () => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
       setImageUploadError(false);
@@ -69,6 +69,7 @@ export default function UpdateListing() {
         .catch((err) => {
           setImageUploadError("Image upload failed (2 mb max per image)");
           setUploading(false);
+          console.log(err);
         });
     } else {
       setImageUploadError("You can only upload 6 images per listing");
@@ -87,6 +88,7 @@ export default function UpdateListing() {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(progress);
         },
         (error) => {
           reject(error);

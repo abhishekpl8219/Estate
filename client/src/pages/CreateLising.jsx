@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   getDownloadURL,
   getStorage,
@@ -7,7 +7,7 @@ import {
 } from "firebase/storage";
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
-import { json, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CreateLising = () => {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ const CreateLising = () => {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const handleImageSubmit = (e) => {
+  const handleImageSubmit = () => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
       setImageUploadError(false);
@@ -51,6 +51,7 @@ const CreateLising = () => {
         .catch((err) => {
           setImageUploadError("image upload failed (2mb max per image)");
           setUploading(false);
+          console.log(err);
         });
     } else {
       setImageUploadError("You can upload 6 image per listing");
@@ -69,6 +70,7 @@ const CreateLising = () => {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(progress);
         },
         (error) => {
           reject(error);

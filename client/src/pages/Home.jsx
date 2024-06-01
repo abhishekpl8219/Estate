@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -62,16 +62,16 @@ const Home = () => {
           className="text-xs sm:text-sm text-blue-800 font-bold hover:underline"
           to={"/search"}
         >
-          Let's Start now
+          Lets Start now
         </Link>
       </div>
       <Swiper navigation>
         {offerListings &&
           offerListings.length > 0 &&
-          offerListings.map((listing, index) => (
+          offerListings.map((listing) => (
             <SwiperSlide key={listing._id}>
               <div
-                className="h-[500px]"
+                className="h-[1200px]"
                 style={{
                   background: `url(${listing.imageUrls[0]}) center no-repeat`,
                   backgroundSize: "cover",
